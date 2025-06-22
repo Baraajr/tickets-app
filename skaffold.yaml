@@ -6,7 +6,7 @@ manifests: # telling scaffold where to find the Kubernetes config files (yaml fi
 build:
   local:
     push: false
-    # useDockerCLI: true # <--- This makes Skaffold respect your Docker CLI context
+    useDockerCLI: true # <--- This makes Skaffold respect your Docker CLI context(prevent image Pull)
     # useBuildkit: false # Optional: disable BuildKit for easier debugging
   artifacts:
     - image: baraajr11/auth
@@ -24,4 +24,12 @@ build:
       sync:
         manual:
           - src: '**/*.js'
+            dest: .
+    - image: baraajr11/tickets
+      context: tickets
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
             dest: .
