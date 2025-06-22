@@ -5,8 +5,6 @@ import request from 'supertest';
 import { app } from '../app';
 
 declare global {
-  // Add the signup function to the globalThis interface
-  var signup: () => Promise<string[]>;
   var signin: () => Promise<string[]>;
 }
 
@@ -32,7 +30,7 @@ afterAll(async () => {
   await mongod.stop();
 });
 
-global.signup = async (): Promise<string[]> => {
+global.signin = async (): Promise<string[]> => {
   const email = 'test@test.com';
   const password = 'password';
 
