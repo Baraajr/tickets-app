@@ -1,10 +1,8 @@
 import express, { NextFunction, Request, Response } from 'express';
 import { body } from 'express-validator';
 import { User } from '../models/user';
-import { RequestValidationError } from '../errors/request-validation-error';
-import { BadRequestError } from '../errors/bad-request-error';
 import Jwt from 'jsonwebtoken';
-import { validateRequest } from '../middlewares/validate-request';
+import { validateRequest, BadRequestError } from '@abtickets-app/common';
 const router = express.Router();
 
 router.post(
