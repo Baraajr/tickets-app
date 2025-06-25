@@ -16,13 +16,22 @@ spec:
         - name: tickets
           image: baraajr11/tickets:latest
           env:
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name # the name of the pod
+            - name: NATS_URL
+              value: 'nats://nats-srv:4222'
+            - name: NATS_CLUSTER_ID
+              value: ticketing
+            - name: MONGO_URI
+              value: 'mongodb://tickets-mongo-srv:27017/tickets'
             - name: JWT_KEY
               valueFrom:
                 secretKeyRef:
                   name: jwt-secret
                   key: JWT_KEY
-            - name: MONGO_URI
-              value: 'mongodb://tickets-mongo-srv:27017/tickets'
+
 ---
 apiVersion: v1
 kind: Service
