@@ -8,6 +8,7 @@ declare global {
 }
 
 jest.setTimeout(30_000); // 30 seconds
+jest.mock('../nats-wrapper.ts'); // to use a fake implementation instead of this file
 let mongod: any;
 beforeAll(async () => {
   process.env.JWT_KEY = 'somekey';
@@ -18,6 +19,7 @@ beforeAll(async () => {
 });
 
 beforeEach(async () => {
+  jest.clearAllMocks();
   const collections = await mongoose.connection.db.collections();
   await Promise.all(
     collections.map((collection: Collection) => collection.deleteMany({}))
