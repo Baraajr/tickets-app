@@ -33,8 +33,8 @@ const start = async () => {
       process.exit();
     });
 
-    process.on('SIGINT', () => natsWrapper.client.close);
-    process.on('SIGTERM', () => natsWrapper.client.close);
+    process.on('SIGINT', () => natsWrapper.client.close());
+    process.on('SIGTERM', () => natsWrapper.client.close());
 
     new TicketCreatedListener(natsWrapper.client).listen();
     new TicketUpdatedListener(natsWrapper.client).listen();
