@@ -1,0 +1,22 @@
+import { Listener, Subjects, TicketCreatedEvent } from '@abtickets-app/common';
+import { Message } from 'node-nats-streaming';
+import { Ticket } from '../../models/ticket';
+import { queueGroupName } from './queue-groub-name';
+
+export class TicketCreatedListener extends Listener<TicketCreatedEvent> {
+  subject: Subjects.TicketCreated = Subjects.TicketCreated;
+  queueGroupName = queueGroupName;
+
+  // create ticket and save it to order database
+  async onMessage(data: TicketCreatedEvent['data'], msg: Message) {
+    console.log('Event data received:', data);
+
+    const { id, title, price } = data;
+
+    const ticket = Ticket.build({ id, title, price });
+
+    await ticket.save();
+
+    msg.ack();
+  }
+}
