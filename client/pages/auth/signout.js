@@ -5,9 +5,9 @@ import useRequest from '../../hooks/use-request';
 export default () => {
   const { doRequest } = useRequest({
     url: '/api/users/signout',
-    method: 'get',
+    method: 'post',
     body: {},
-    onSuccess: () => Router.push('/'),
+    onSuccess: () => Router.push('/')
   });
 
   useEffect(() => {
