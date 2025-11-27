@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken';
 
 // read stripe key for test
 // dotenv.config();
+dotenv.config();
 // process.env.STRIPE_KEY = 'put your secret here';
 
 declare global {
