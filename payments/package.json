@@ -1,5 +1,5 @@
 {
-  "name": "orders",
+  "name": "payments",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -33,6 +33,7 @@
     "mongoose-update-if-current": "^1.4.0",
     "morgan": "^1.10.0",
     "node-nats-streaming": "^0.3.2",
+    "stripe": "^20.0.0",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.3"
   },
