@@ -1,7 +1,12 @@
 const mongoose = require('mongoose');
+import dotenv from 'dotenv';
 const { MongoMemoryServer } = require('mongodb-memory-server');
 import { Collection } from 'mongodb';
 import jwt from 'jsonwebtoken';
+
+// read stripe key for test
+// dotenv.config();
+// process.env.STRIPE_KEY = 'put your secret here';
 
 declare global {
   var signin: (id?: string) => string[];
@@ -10,8 +15,6 @@ declare global {
 jest.setTimeout(30_000); // 30 seconds
 
 jest.mock('../nats-wrapper.ts'); // to use a fake implementation instead of this file
-
-process.env.STRIPE_KEY = 'put your secret here';
 
 let mongod: any;
 beforeAll(async () => {
