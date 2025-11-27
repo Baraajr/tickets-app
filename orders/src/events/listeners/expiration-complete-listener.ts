@@ -4,7 +4,7 @@ import {
   OrderStatus,
   Subjects,
 } from '@abtickets-app/common';
-import { queueGroupName } from './queue-groub-name';
+import { queueGroupName } from './queue-group-name';
 import { Message } from 'node-nats-streaming';
 import { Order } from '../../models/order';
 import { OrderCancelledPublisher } from '../publisher/order-cancelled-publisher';
@@ -18,6 +18,9 @@ export class ExpirationCompleteListener extends Listener<ExpirationCompleteEvent
     const order = await Order.findById(data.orderId).populate('ticket');
 
     if (!order) throw new Error('Order not found');
+
+    // order already purchased
+    if (order.status === OrderStatus.Complete) return msg.ack();
 
     order.set({
       status: OrderStatus.Cancelled,

@@ -1,7 +1,7 @@
 import { Listener, Subjects, TicketCreatedEvent } from '@abtickets-app/common';
 import { Message } from 'node-nats-streaming';
 import { Ticket } from '../../models/ticket';
-import { queueGroupName } from './queue-groub-name';
+import { queueGroupName } from './queue-group-name';
 
 export class TicketCreatedListener extends Listener<TicketCreatedEvent> {
   subject: Subjects.TicketCreated = Subjects.TicketCreated;
