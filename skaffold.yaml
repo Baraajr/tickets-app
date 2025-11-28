@@ -3,6 +3,7 @@ kind: Config
 manifests: # telling scaffold where to find the Kubernetes config files (yaml files)
   rawYaml:
     - ./infra/k8s/*
+    - ./infra/k8s-dev/*
 build:
   local:
     push: false
