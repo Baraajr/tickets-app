@@ -1,0 +1,25 @@
+name: deploy-auth
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'auth/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      - run: cd auth && docker build -t baraajr11/auth .
+      - run: docker push baraajr11/auth
+      # - uses: digitalocean/action-doctl@v2  # uncomment this when you have a digital ocean token
+      #   with:
+      #     token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} # i don't have a digital ocean token
+      # - run: doctl kubernetes cluster kubeconfig save ticketing #  ticketing here is the name of cluster on digital ocean
+      # - run: kubectl rollout restart deployment auth-depl # apply changes to auth deployment by restarting it
