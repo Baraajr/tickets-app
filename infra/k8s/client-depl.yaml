@@ -15,7 +15,7 @@ spec:
       containers:
         - name: client
           image: baraajr11/client:latest
-          imagePullPolicy: Never
+
 ---
 apiVersion: v1
 kind: Service
